@@ -1,0 +1,15 @@
+.ProductContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 76em;
+    background-color: #e1c087;
+    padding: 2em;
+    margin:0px auto;
+    margin-top: 6em;
+
+}
+.imgLarge{
+    transform: scale(0.7);
+}
