@@ -6,6 +6,9 @@ import { CardWidget } from '../CardWidget/CardWidjet';
 import { CartContext } from '../../context/CartContext';
 
 
+
+
+
 export const ProductDetail = ({item})=> {
 
     
