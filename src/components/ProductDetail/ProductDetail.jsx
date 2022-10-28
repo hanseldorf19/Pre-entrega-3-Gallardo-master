@@ -7,8 +7,6 @@ import { CartContext } from '../../context/CartContext';
 
 
 
-
-
 export const ProductDetail = ({item})=> {
 
     
@@ -45,9 +43,4 @@ export const ProductDetail = ({item})=> {
         </div>
     )
 }
-//1) Creamos una función en el componente padre, qu e recibe una variable
-// desde el componente hijo
-//2) Esa función se la asignamos a una propiedad del componente hijo, desde el padre
-// en este caso <h5>{item.price}</h5><ItemCounter initial={1} stock={10} onAdd={addProduct} />
-//3) Finalmente en el evento del como hijo llamamos directamente a esa propiedad onAdd y le pasamos la variable
-// como parametro 
+

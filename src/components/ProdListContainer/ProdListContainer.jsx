@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import { arrayProducts } from '../baseDatos/baseDatos';
+
 import { ProductList } from '../ProductList/ProductList'
-// import { categoryId } from '../Apps.js'
+
 import { useState, useEffect } from 'react';
-// import { useState, useEffect } from 'react';
+
 import { useParams } from 'react-router-dom';
 
 //firebase
-import { collection, doc, getDoc, getDocs, query, where, limit } from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../utils/firebase'
 
 
@@ -52,7 +52,7 @@ const { categoryId } = useParams();
 useEffect(()=>{
     const getData = async()=>{
      //crear referencia del punto de acceso de la informacion.
-    const queryRef = query(collection(db, "items"), where('categoria','==',categoryId));
+    const queryRef = query(collection(db, "items"), where('categoria','==', categoryId));
      //obtener todos los documentos de la coleccion items/
      const response = await getDocs(queryRef);
      console.log(response);
