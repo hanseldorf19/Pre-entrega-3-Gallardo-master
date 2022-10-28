@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import './CartContainer.css'
 import { useContext,useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { db } from '../../utils/firebase'
-import { collection, addDoc, doc, updateDoc } from 'firebase/firestore'
+import { collection, addDoc, doc } from 'firebase/firestore'
 
 export const CartContainer = ()=>{
 
@@ -40,18 +40,10 @@ export const CartContainer = ()=>{
 
     }
 
-    const updateProduct = ()=> {
-        //Primero creamos la referencia del producto que vamos a actualizar
-        const queryRef = doc(db,'items', 'U7tYXKbz46JxqetaL3h8');
-        //actualizamos el documento // nos devulve una promesa, que no nos da un dato, nos da si se realizo o no
-        // el primer elemento es el doc que vamos a actualizar y el segundo la propiedad de ese doc
-        updateDoc(queryRef,{price:120}).then(()=>console.log('actualizado correctamente'))
-        .catch(()=>console.log('hubo un error'));
-    }
 
     return(
-        
-        <div style={{width: '800px'}}>
+        <div>
+        <div className='PrductCard'>
         {
 
         prodCarrito.map((producto)=>(
@@ -61,7 +53,7 @@ export const CartContainer = ()=>{
             <h4>Precio unidad {producto.price} €</h4>
             <p>Cantidad: {producto.quantity}</p>
             <p>Precio total: {producto.quantityPrice} € </p>
-            <button onClick={()=>removeProduct(producto.id)}>Eliminar</button>
+            <button className='mt-2 btn btn-dark' onClick={()=>removeProduct(producto.id)}>Eliminar</button>
         </div>
         ))
 
@@ -70,12 +62,14 @@ export const CartContainer = ()=>{
         <p><strong>Productos: </strong>{getTotalProducts()}</p>
 
         {
-            compraId && <p>SU compra fue realizada con el numero de orden {compraId}</p>
+            compraId && <p>Su compra fue realizada con el numero de orden {compraId}</p>
         }
         
-         {//   prodCarrito.lenght > 0 ?  :
-         }
-        
+         {
+         
+         prodCarrito.lenght > 0 ? 
+         <div className='mt-3 ml-3'>
+         <p>Facilite sus datos por favor</p>
         <form onSubmit={SendOrder}>
             <label>Nombre</label>
             <input type='text' placeholder="Nombre"/>
@@ -83,11 +77,16 @@ export const CartContainer = ()=>{
             <input type='tel' placeholder="Nombre"/>
             <label>Correo</label>
             <input type='mail' placeholder="Correo Electrónico"/>
-            <button type="Submit">Enviar Orden</button>
+            <button className='mt-2 btn btn-dark' type="Submit">Comprar</button>
         </form>
+            </div>
+        :
 
-        <h4 className='mt-5'>No tiene productos en su carrito de compra</h4>
-        <button onClick={updateProduct}>Actualizar Producto</button>
+        <h4 className='mt-5 '>No tiene productos en su carrito de compra</h4>
+        
+        }
+    
+       </div>
        </div>
         
     )
