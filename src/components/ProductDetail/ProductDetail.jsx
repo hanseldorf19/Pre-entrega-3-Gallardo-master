@@ -20,24 +20,34 @@ export const ProductDetail = ({item})=> {
     }
 
     return(
-        <div className="ProductContainer">
-            <div className='imgLarge rounded'>
-                <img src={item.picUrlLarge} alt={item.title}/>
-            </div>
-            <div className='descripContainer'>
-            <h3>{item.title}</h3>
-            <h5>{item.price}</h5>
+        <div className="d-flex flex-row">
+            <div className="ProductContainer">
             
-            <ItemCounter initial={1} stock={5} onAdd={agregarProducto} />
-          
-                {
-                    contador > 1 ? <NavLink className={({isActive})=>isActive === true ? 'claseActiva' : 'claseInActiva'} to='/cart'>
-                        <button className='btn btn-dark'>Terminar Compra</button></NavLink> : ''
-                }
-            
+                <div className='Product'>
+                <h3 className='mt-5'>{item.title}</h3>
+                    <img className='imgLarge rounded' src={item.picUrlLarge} alt={item.title}/>
+                        <p className='descripContainer'>{item.descripcion}</p>
+                </div>
+                <div>
+                    
+                <h5 className='mt-5 text-white bg-dark rounded p-2'>{item.price} €</h5>
+
+                    <div className='mt-5'>
+
+                        <ItemCounter initial={1} stock={5} onAdd={agregarProducto} />
+                
+                        {
+                            contador >= 1 ? <NavLink className={({isActive})=>isActive === true ? 'claseActiva' : 'claseInActiva'} to='/cart'>
+                                <button className='btn btn-dark'>Terminar Compra</button></NavLink> : ''
+                        }
+                    
+                    </div>
+                </div>
             </div>
             
         </div>
+            
+
     )
 }
 
