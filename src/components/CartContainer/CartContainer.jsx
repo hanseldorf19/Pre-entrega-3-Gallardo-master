@@ -140,9 +140,9 @@ export const CartContainer = ()=>{
                 <p><strong>Finalizar Compra</strong></p>
 
                 <form className='aplicaCupon d-block' onSubmit={aplicaCupon}>
-                <label>Cupón Dto del 5%</label>
+                <label className='mx-3'>Cupón Dto del 5%</label>
                     <input type='text' placeholder="Aplica Cupón Dto"/>
-                    <button type="Submit" className='mt-2 mx-5 btn btn-dark'>Aplicar</button>
+                    <button type="Submit" className='d-block mt-2 mx-5 btn btn-dark'>Aplicar</button>
                 </form>
 
                 <p>Precio Final: {getTotalPrice()}</p>
@@ -157,7 +157,7 @@ export const CartContainer = ()=>{
                     <label>Codigo Postal</label>
                     <input type='number' required maxlenght='5' placeholder="Código Postal"/>
                     <label>Teléfono</label>
-                    <input type='tel' placeholder=" Teléfono"/>
+                    <input type='tel' required maxlength="11" placeholder="Teléfono"/>
                     <label>Correo</label>
                     <input type='mail' placeholder="Correo Electrónico"/>
                     <button className='d-block mt-5 mx-5 btn btn-dark text-center' type="Submit" onClick={displayMsg}>Comprar</button>
