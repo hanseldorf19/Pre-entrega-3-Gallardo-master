@@ -6,11 +6,36 @@ import './CartContainer.css'
 import { useContext,useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { db } from '../../utils/firebase'
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, doc, getDoc } from 'firebase/firestore'
 
 
 export const CartContainer = ()=>{
 
+     // Cupon descuento
+
+    const [cuponDto, setCuponDto] = useState('');
+
+     const aplicaCupon = (cupon)=>{
+        console.log(cupon)
+        setCuponDto(cupon);
+        
+        if (cuponDto === 'Lan022') {
+
+        const priceCuponDto = getTotalPrice() - (getTotalPrice() * 0.05);
+        priceCuponDto = getTotalPrice();
+        console.log(priceCuponDto)
+        
+        } else if (cuponDto == '') {
+            console.log('puede introducir un cupon')
+            
+        } else {
+
+         console.log('puede introducir un cupon')
+        }
+    }
+
+    // Alerta Orden de Compra
+    
     const Msg = () => (
         <div>
           {compraId && <p>Su compra fue realizada con el numero de orden {compraId}</p>}
@@ -24,13 +49,15 @@ export const CartContainer = ()=>{
 
       }
 
+      const [compraId, setCompraId] = useState('');
+
+    // Muestra Productos
     const value = useContext(CartContext);
 
     const {prodCarrito, getTotalPrice, getTotalProducts,removeProduct} = value;
 
-
-    const [compraId, setCompraId] = useState('');
     
+    // Mandar Orden de Compra
     const SendOrder = (evt)=>{
         evt.preventDefault(); 
         const compra = {
@@ -40,21 +67,43 @@ export const CartContainer = ()=>{
                 email: evt.target[2].value
             },
             items: prodCarrito,
-            totla: getTotalPrice()
+            total: getTotalPrice()
         }  
       
         
-        
+        // Crear y subir a Firestore
         const queryRef = collection(db,'orders')
       
         addDoc(queryRef,compra).then((resultado)=>{
-            console.log(resultado.id) 
+            console.log(resultado.id)
             setCompraId(resultado.id)
         })
 
-    }
+
+       
+
+        }
+
+        
+        // const getName = async()=>{
+
+        //     const docRef = doc(db,"orders",compra.buyer);
+        //     const docSnap = await getDoc(docRef);
+
+        //     if (docSnap.exists()) {
+        //     console.log("Document data:", docSnap.data());
+        //     } else {
+        //     console.log("No such document!");
+        //     }  
+
+        // }
+        // getName(); 
+        
+
+    
 
     return(
+
         <div className='CartContainer d-flex bd justify-content-center flex-row '>
             <div className='d-block mx-5'>
             
@@ -77,7 +126,7 @@ export const CartContainer = ()=>{
 
             }  
         
-        </div>
+            </div>
        
       
         {
@@ -88,6 +137,15 @@ export const CartContainer = ()=>{
                 <p><strong>Precio Total: </strong>{getTotalPrice()}</p>
                 <p><strong>Productos: </strong>{getTotalProducts()}</p>
                 <p><strong>Finalizar Compra</strong></p>
+
+                <form className='aplicaCupon d-block' onSubmit={aplicaCupon}>
+                <label>Cupón Dto del 5%</label>
+                    <input type='text' placeholder="Aplica Cupón Dto"/>
+                    <button type="Submit" className='mt-2 mx-5 btn btn-dark'>Aplicar</button>
+                </form>
+
+                <p>Precio Final: {getTotalPrice()}</p>
+
                 <form className='formCompra mt-3 mr-3' required="required" onSubmit={SendOrder}>
                     <label>Nombre</label>
                     <input type='text' placeholder="Nombre"/>
@@ -111,5 +169,6 @@ export const CartContainer = ()=>{
 
         </div>
         
+        
     )
-}   
+}
