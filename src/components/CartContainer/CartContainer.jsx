@@ -16,6 +16,7 @@ export const CartContainer = ()=>{
     const [cuponDto, setCuponDto] = useState('');
 
      const aplicaCupon = (cupon)=>{
+        cupon.preventDefault()
         console.log(cupon)
         setCuponDto(cupon);
         
@@ -27,7 +28,7 @@ export const CartContainer = ()=>{
         
         } else if (cuponDto == '') {
             console.log('puede introducir un cupon')
-            
+
         } else {
 
          console.log('puede introducir un cupon')
@@ -146,15 +147,15 @@ export const CartContainer = ()=>{
 
                 <p>Precio Final: {getTotalPrice()}</p>
 
-                <form className='formCompra mt-3 mr-3' required="required" onSubmit={SendOrder}>
+                <form className='formCompra mt-3 mr-3' required= "required" onSubmit={SendOrder}>
                     <label>Nombre</label>
-                    <input type='text' placeholder="Nombre"/>
+                    <input type='text' placeholder="Nombre" required maxlength="45"/>
                     <label>Apellidos</label>
-                    <input type='text' placeholder="Apellidos"/>
+                    <input type='text' placeholder="Apellidos" required maxlength="45"/>
                     <label>Dirección</label>
-                    <input type='text' placeholder="Dirección"/>
+                    <input type='text' placeholder="Dirección" required maxlength="100" />
                     <label>Codigo Postal</label>
-                    <input type='number' maxlenght='5' placeholder="Código Postal"/>
+                    <input type='number' required maxlenght='5' placeholder="Código Postal"/>
                     <label>Teléfono</label>
                     <input type='tel' placeholder=" Teléfono"/>
                     <label>Correo</label>
