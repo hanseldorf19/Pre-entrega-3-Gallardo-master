@@ -22,7 +22,7 @@ export const CartContainer = ()=>{
 
      const [newPrice, setNewPrice]= useState(0)
 
-    const [cuponDto, setCuponDto] = useState('');
+     const [cuponDto, setCuponDto] = useState('');
 
      const aplicaCupon = (e)=>{
         e.preventDefault(); 
@@ -33,11 +33,11 @@ export const CartContainer = ()=>{
         console.log(priceCuponDto)
         
         } else if (cuponDto == '') {
-            console.log('puede introducir un cupon')
+            alert('puede introducir un cupon')
             
         } else {
 
-         console.log('Este cupon no tiene descuento')
+         alert('Este cupon no tiene descuento')
         }
     }
 
@@ -45,22 +45,14 @@ export const CartContainer = ()=>{
     
     const Msg = () => (
         <div>
-          <p>Muchas Gracias</p>
           {compraId && <p>Su compra fue realizada con el numero de orden {compraId}</p>}
-          <Link to="/"><button className='mt-2 btn btn-primary' onClick={clear()}>Realizar Otra Compra</button></Link>
+          
         </div>
       )
+        
 
     const displayMsg = () => {
-        toast(<Msg />, {position: "top-right",
-        autoClose: 10000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-            }) 
+        toast(<Msg/>)
       }
 
       const [compraId, setCompraId] = useState('');
@@ -135,6 +127,7 @@ export const CartContainer = ()=>{
                 </form>
 
                 <p>Precio Final:</p> 
+
                     {
                     newPrice > 0 ? 
                     <div><p className='precioTachado'>{getTotalPrice()}</p> <p><stong>{newPrice}</stong></p>
