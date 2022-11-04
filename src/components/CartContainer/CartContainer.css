@@ -41,6 +41,11 @@
 }
 .tostyAlert {
     background-color: #C1974F;
-    
-    toastify-color-success: #07bc0c;
+
 }
+
+.precioTachado {
+    text-decoration:line-through;
+    color: red;
+}
+
